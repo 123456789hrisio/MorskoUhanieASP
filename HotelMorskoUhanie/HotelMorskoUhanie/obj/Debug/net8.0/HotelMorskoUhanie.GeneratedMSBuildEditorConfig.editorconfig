@@ -82,26 +82,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rijko/Documents/MorskoUhanieASP/HotelMorskoUhanie/HotelMorskoUhanie/Views/RoomNumbers/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbU51bWJlcnNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rijko/Documents/MorskoUhanieASP/HotelMorskoUhanie/HotelMorskoUhanie/Views/RoomNumbers/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbU51bWJlcnNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rijko/Documents/MorskoUhanieASP/HotelMorskoUhanie/HotelMorskoUhanie/Views/RoomNumbers/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbU51bWJlcnNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rijko/Documents/MorskoUhanieASP/HotelMorskoUhanie/HotelMorskoUhanie/Views/RoomNumbers/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbU51bWJlcnNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rijko/Documents/MorskoUhanieASP/HotelMorskoUhanie/HotelMorskoUhanie/Views/RoomNumbers/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbU51bWJlcnNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/rijko/Documents/MorskoUhanieASP/HotelMorskoUhanie/HotelMorskoUhanie/Views/Rooms/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

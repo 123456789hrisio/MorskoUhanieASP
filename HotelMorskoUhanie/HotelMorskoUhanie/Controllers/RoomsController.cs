@@ -21,7 +21,7 @@ namespace HotelMorskoUhanie.Controllers
         // GET: Rooms
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Rooms.Include(r => r.RoomNumbers).Include(r => r.RoomTypes);
+            var applicationDbContext = _context.Rooms.Include(r => r.RoomTypes);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +34,6 @@ namespace HotelMorskoUhanie.Controllers
             }
 
             var room = await _context.Rooms
-                .Include(r => r.RoomNumbers)
                 .Include(r => r.RoomTypes)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (room == null)
@@ -48,7 +47,6 @@ namespace HotelMorskoUhanie.Controllers
         // GET: Rooms/Create
         public IActionResult Create()
         {
-            ViewData["RoomNumbersId"] = new SelectList(_context.RoomNumbers, "Id", "Name");
             ViewData["RoomTypesId"] = new SelectList(_context.RoomTypes, "Id", "Name");
             return View();
         }
@@ -58,7 +56,7 @@ namespace HotelMorskoUhanie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoomNumbersId,RoomTypesId,Description,PhotoUrl,PricePerDay,DateModified")] Room room)
+        public async Task<IActionResult> Create([Bind("RoomNumbersName,RoomTypesId,Description,PhotoUrl,PricePerDay,DateModified")] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,6 @@ namespace HotelMorskoUhanie.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoomNumbersId"] = new SelectList(_context.RoomNumbers, "Id", "Name", room.RoomNumbersId);
             ViewData["RoomTypesId"] = new SelectList(_context.RoomTypes, "Id", "Name", room.RoomTypesId);
             return View(room);
         }
@@ -85,7 +82,6 @@ namespace HotelMorskoUhanie.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoomNumbersId"] = new SelectList(_context.RoomNumbers, "Id", "Name", room.RoomNumbersId);
             ViewData["RoomTypesId"] = new SelectList(_context.RoomTypes, "Id", "Name", room.RoomTypesId);
             return View(room);
         }
@@ -95,7 +91,7 @@ namespace HotelMorskoUhanie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RoomNumbersId,RoomTypesId,Description,PhotoUrl,PricePerDay,DateModified")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RoomNumbersName,RoomTypesId,Description,PhotoUrl,PricePerDay,DateModified")] Room room)
         {
             if (id != room.Id)
             {
@@ -123,7 +119,6 @@ namespace HotelMorskoUhanie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoomNumbersId"] = new SelectList(_context.RoomNumbers, "Id", "Name", room.RoomNumbersId);
             ViewData["RoomTypesId"] = new SelectList(_context.RoomTypes, "Id", "Name", room.RoomTypesId);
             return View(room);
         }
@@ -137,7 +132,6 @@ namespace HotelMorskoUhanie.Controllers
             }
 
             var room = await _context.Rooms
-                .Include(r => r.RoomNumbers)
                 .Include(r => r.RoomTypes)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (room == null)

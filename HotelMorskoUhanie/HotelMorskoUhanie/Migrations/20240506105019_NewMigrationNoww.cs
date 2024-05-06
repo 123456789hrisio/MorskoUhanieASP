@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelMorskoUhanie.Migrations
 {
     /// <inheritdoc />
-    public partial class HotelMigraciqq : Migration
+    public partial class NewMigrationNoww : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,20 +51,6 @@ namespace HotelMorskoUhanie.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoomNumbers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomNumberName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoomNumbers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -193,7 +179,7 @@ namespace HotelMorskoUhanie.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomNumbersId = table.Column<int>(type: "int", nullable: false),
+                    RoomNumbersName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoomTypesId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -203,12 +189,6 @@ namespace HotelMorskoUhanie.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Rooms_RoomNumbers_RoomNumbersId",
-                        column: x => x.RoomNumbersId,
-                        principalTable: "RoomNumbers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Rooms_RoomTypes_RoomTypesId",
                         column: x => x.RoomTypesId,
@@ -296,11 +276,6 @@ namespace HotelMorskoUhanie.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rooms_RoomNumbersId",
-                table: "Rooms",
-                column: "RoomNumbersId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_RoomTypesId",
                 table: "Rooms",
                 column: "RoomTypesId");
@@ -335,9 +310,6 @@ namespace HotelMorskoUhanie.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rooms");
-
-            migrationBuilder.DropTable(
-                name: "RoomNumbers");
 
             migrationBuilder.DropTable(
                 name: "RoomTypes");

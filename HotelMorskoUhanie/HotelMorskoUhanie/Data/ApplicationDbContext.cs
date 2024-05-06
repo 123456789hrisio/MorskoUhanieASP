@@ -11,7 +11,6 @@ namespace HotelMorskoUhanie.Data
         }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
-        public DbSet<RoomNumber> RoomNumbers { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
     }
 }

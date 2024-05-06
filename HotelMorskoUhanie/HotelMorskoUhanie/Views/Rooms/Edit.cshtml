@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="RoomNumbersId" class="control-label"></label>
-                <select asp-for="RoomNumbersId" class="form-control" asp-items="ViewBag.RoomNumbersId"></select>
-                <span asp-validation-for="RoomNumbersId" class="text-danger"></span>
+                <label asp-for="RoomNumbersName" class="control-label"></label>
+                <input asp-for="RoomNumbersName" class="form-control" />
+                <span asp-validation-for="RoomNumbersName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoomTypesId" class="control-label"></label>
@@ -38,7 +38,7 @@
                 <input asp-for="PricePerDay" class="form-control" />
                 <span asp-validation-for="PricePerDay" class="text-danger"></span>
             </div>
- @*            <div class="form-group">
+       @*      <div class="form-group">
                 <label asp-for="DateModified" class="control-label"></label>
                 <input asp-for="DateModified" class="form-control" />
                 <span asp-validation-for="DateModified" class="text-danger"></span>

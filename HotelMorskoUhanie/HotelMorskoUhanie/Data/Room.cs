@@ -5,8 +5,7 @@ namespace HotelMorskoUhanie.Data
     public class Room
     {
         public int Id { get; set; }
-        public int RoomNumbersId { get; set; }
-        public RoomNumber RoomNumbers { get; set; }
+        public string RoomNumbersName { get; set; }
         public int RoomTypesId { get; set; }
         public RoomType RoomTypes { get; set; }
         public string Description { get; set; }

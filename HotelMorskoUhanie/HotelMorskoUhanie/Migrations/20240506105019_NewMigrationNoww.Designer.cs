@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelMorskoUhanie.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240504154403_HotelMigraciqq")]
-    partial class HotelMigraciqq
+    [Migration("20240506105019_NewMigrationNoww")]
+    partial class NewMigrationNoww
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -80,39 +80,18 @@ namespace HotelMorskoUhanie.Migrations
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<int>("RoomNumbersId")
-                        .HasColumnType("int");
+                    b.Property<string>("RoomNumbersName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoomTypesId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomNumbersId");
-
                     b.HasIndex("RoomTypesId");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("HotelMorskoUhanie.Data.RoomNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RoomNumberName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RoomNumbers");
                 });
 
             modelBuilder.Entity("HotelMorskoUhanie.Data.RoomType", b =>
@@ -369,19 +348,11 @@ namespace HotelMorskoUhanie.Migrations
 
             modelBuilder.Entity("HotelMorskoUhanie.Data.Room", b =>
                 {
-                    b.HasOne("HotelMorskoUhanie.Data.RoomNumber", "RoomNumbers")
-                        .WithMany("Rooms")
-                        .HasForeignKey("RoomNumbersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HotelMorskoUhanie.Data.RoomType", "RoomTypes")
                         .WithMany("Rooms")
                         .HasForeignKey("RoomTypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("RoomNumbers");
 
                     b.Navigation("RoomTypes");
                 });
@@ -440,11 +411,6 @@ namespace HotelMorskoUhanie.Migrations
             modelBuilder.Entity("HotelMorskoUhanie.Data.Room", b =>
                 {
                     b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("HotelMorskoUhanie.Data.RoomNumber", b =>
-                {
-                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("HotelMorskoUhanie.Data.RoomType", b =>
