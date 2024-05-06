@@ -57,7 +57,21 @@ namespace HotelMorskoUhanie.Controllers
             //ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-
+        public async Task<IActionResult> CreateWithRoomId(int roomId, DateTime comeDate, DateTime leaveDate )
+        {
+            var currentRoom = await _context.Rooms.FirstOrDefaultAsync(z => z.Id == roomId);
+            Reservation reservation = new Reservation();
+            //order.ProductsId = productId;
+            // productId = order.ProductsId;
+            reservation.RoomsId = roomId;
+            reservation.ComeInDate = comeDate;
+            reservation.LeaveDate = leaveDate;
+            reservation.UsersId = _userManager.GetUserId(User);
+            var price = currentRoom.PricePerDay;
+            _context.Reservations.Add(reservation);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         // POST: Reservations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

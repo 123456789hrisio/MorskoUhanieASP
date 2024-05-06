@@ -3,31 +3,44 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<style>
+    thead {
+        background-color: #C2DFFF;
+    }
+</style>
+<center><h1>Резервации</h1></center>
+<br />
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ComeInDate)
+                Дата на настаняване
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeaveDate)
+                Дата на напускане
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Users)
+                Резервирана стая
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateModified)
-            </th>
-            <th></th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    Резервирано от
+                </th>
+            }
+         
+           
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    Дата на промяна
+                </th>   
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Опции</th>
+            }
+            
         </tr>
     </thead>
     <tbody>
@@ -39,20 +52,34 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LeaveDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rooms.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateModified)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rooms.RoomNumbersName)
+                </td>   
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                       @*  @Html.DisplayFor(modelItem => item.Users.FirstName) *@
+                        @item.Users.FirstName @item.Users.LastName
+                    </td>
+                }
+           
+       
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateModified)
+                    </td>
+                }
+         
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a class="btn btn-primary"asp-action="Edit" asp-route-id="@item.Id">Промени</a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Детайли</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
+                    </td>
+                }
+   
         </tr>
 }
     </tbody>

@@ -7,12 +7,23 @@
     thead {
         background-color: #C2DFFF;
     }
-</style>
-<center><h1>Нашите предложения за стаи</h1></center>
+    .reservation{
+        display:flex;
+        justify-content:center;
+    }
+    .btn{
+        
+    }
+    .btn input[type=submit]{
+        margin-left:30%;
+        width:210px;
+    }
 
-<div class="btnCreate">
+</style>
+<center><h1>Нашите предложения за настаняване в хотела</h1></center>
+
     <center><a class="btn btn-primary" asp-action="Create">Добави стая</a></center>
-</div>
+
 <br />
 <table class="table table-bordered ">
     <thead>
@@ -59,7 +70,7 @@
         {
             <tr>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.PhotoUrl)" style="border-radius:3%;border:2px solid black" width="220" />
+                    <a asp-action="Details" asp-route-id="@item.Id"><img src="@Html.DisplayFor(modelItem => item.PhotoUrl)" style="border-radius:3%;border:2px solid black" width="220" /></a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RoomNumbersName)
@@ -84,6 +95,24 @@
                         <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Редакция</a>
                         <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Детайли</a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
+                    </td>
+                }
+                else
+                {
+                    <td class="reservation">
+                        <form method="get" asp-controller="Reservations" asp-action="CreateWithRoomId" asp-route-roomId="@item.Id">
+                            <label>Дата на настаняване: </label>
+                            <input name="roomId" type="hidden" value="@item.Id" />
+                            <input type="datetime-local" id="birthdaytime" name="comeDate">
+                            <br />
+                            <label>Дата на напускане:&ensp;&ensp;</label>
+                            <input type="datetime-local" id="birthdaytime" name="leaveDate">
+                            <br />
+                            <div class="btn">
+                                <input id="reserveBtn" type="submit" value="Резервирай" class="btn btn-primary" />
+                            </div>
+                            
+                        </form>
                     </td>
                 }
 
