@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HotelMorskoUhanie")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b1e7f28f34d05d4803063af8d1241d2f18c215e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a752bbd897cceeb48e9952b43dae878cf068aee")]
 [assembly: System.Reflection.AssemblyProductAttribute("HotelMorskoUhanie")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HotelMorskoUhanie")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

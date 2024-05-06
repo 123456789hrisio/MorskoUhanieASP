@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelMorskoUhanie.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace HotelMorskoUhanie.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ReservationsController(ApplicationDbContext context)
+        public ReservationsController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Reservations
@@ -58,9 +63,11 @@ namespace HotelMorskoUhanie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ComeInDate,LeaveDate,UsersId,RoomsId")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ComeInDate,LeaveDate,RoomsId")] Reservation reservation)
         {
             reservation.DateModified = DateTime.Now;
+            reservation.UsersId = _userManager.GetUserId(User);
+
             if (ModelState.IsValid)
             {
                 _context.Reservations.Add(reservation);
@@ -85,8 +92,8 @@ namespace HotelMorskoUhanie.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoomsId"] = new SelectList(_context.Rooms, "Id", "Id", reservation.RoomsId);
-            ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Id", reservation.UsersId);
+            ViewData["RoomsId"] = new SelectList(_context.Rooms, "Id", "Name", reservation.RoomsId);
+            //ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Id", reservation.UsersId);
             return View(reservation);
         }
 
@@ -95,7 +102,7 @@ namespace HotelMorskoUhanie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ComeInDate,LeaveDate,UsersId,RoomsId,DateModified")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ComeInDate,LeaveDate,RoomsId,DateModified")] Reservation reservation)
         {
             if (id != reservation.Id)
             {
@@ -106,6 +113,8 @@ namespace HotelMorskoUhanie.Controllers
             {
                 try
                 {
+                    reservation.UsersId = _userManager.GetUserId(User);
+                    reservation.DateModified = DateTime.Now;
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
                 }
@@ -122,8 +131,8 @@ namespace HotelMorskoUhanie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoomsId"] = new SelectList(_context.Rooms, "Id", "Id", reservation.RoomsId);
-            ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Id", reservation.UsersId);
+            ViewData["RoomsId"] = new SelectList(_context.Rooms, "Id", "Name", reservation.RoomsId);
+            //ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Id", reservation.UsersId);
             return View(reservation);
         }
 
