@@ -1,3 +1,4 @@
+using ASPShopBag.Services;
 using HotelMorskoUhanie.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,7 @@ else
     app.UseHsts();
 }
 
+app.PrepareDataBase().Wait();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
